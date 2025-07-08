@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles 2.css">
+    <title>PRZN Websites - Job applications</title>
+             <center>
+     <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/Picture5.png" alt="PRZN Company Logo">
+                <span class="logo-text">PRZN Websites</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="profiles.html">Employee profiles</a>
+                <a href="vacancies.html">Job vacancies</a>
+                <a href="courses.html">Course links</a>
+                <a href="applications.html">Job applications</a>
+            </div>
+            <button class="mobile-nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+        </center>   
+</head>
+
+<body>
+<main class="apply-page-container">
+        <div class="apply-image-column">
+            <img src="images/Picture15.jpg" alt="Abstract background image">
+        </div>
+        <div class="apply-form-column">
+            <div id="success-message">
+                <h2>Submitted Successfully!</h2>
+                <p>Thank you for your application. We will be in touch shortly.</p>
+            </div>
+            <form action="#" id="application-form">
+                <h1>Apply Now</h1>
+                
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g., 01234567890" required pattern="[0-9]{10,11}">
+                 <small class="validation-message">Please enter a valid 10 or 11 digit phone number.</small>
+                <label for="myFile">Upload CV</label>
+                <input type="file" id="myFile" name="filename" required>
+
+                <button type="submit" class="btn">Submit Application</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>PRZN Websites</h4>
+                <p>Building digital experiences that matter. We focus on quality, functionality, and customer satisfaction.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profiles.html">Our Team</a></li>
+                    <li><a href="vacancies.html">Careers</a></li>
+                    <li><a href="applications.html">Apply Now</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <p>126 Kingston Road<br>Kingston, KT1 1ND<br>Email: info@przn.co.uk</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PRZN Websites. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+   <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const applicationForm = document.getElementById('application-form');
+    const successMessage = document.getElementById('success-message');
+    const phoneInput = document.getElementById('phone');
+    const phoneValidationMessage = document.querySelector('.validation-message');
+
+    function validatePhone() {
+        if (phoneInput.validity.patternMismatch || phoneInput.value === "") {
+            phoneValidationMessage.style.display = 'block';
+        } else {
+            phoneValidationMessage.style.display = 'none';
+        }
+    }
+
+    phoneInput.addEventListener('keyup', validatePhone);
+
+    applicationForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        if (applicationForm.checkValidity()) {
+            applicationForm.style.display = 'none';
+            successMessage.style.display = 'block';
+        } else {
+            validatePhone();
+            applicationForm.reportValidity();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

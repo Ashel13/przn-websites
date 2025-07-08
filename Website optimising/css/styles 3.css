@@ -1,0 +1,189 @@
+/* Colours*/
+:root {
+    --color-nav-footer: #0A0A0A;     
+    --color-background: #18181B;      
+    --color-card-background: #F4F4F5; 
+    --color-card-text: #18181B;      
+    --color-card-border: #E4E4E7;   
+    --color-primary: #2563EB;       
+    --color-primary-hover: #3B82F6;    
+    --color-text-light: #F9FAFB;   
+    --color-text-secondary: #A1A1AA; 
+    --color-white: #FFFFFF;
+}
+
+*{
+  margin: 0;
+  padding:  0;
+  box-sizing: border-box;
+    font-family: 'Roboto';
+}
+.main-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-nav-footer);
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.nav-logo img {
+    max-height: 50px;
+    width: auto;
+}
+
+.logo-text {
+    color: var(--color-white);
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-primary-hover);
+}
+
+/*Text Colours etc*/
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-light);
+    overflow-x: hidden;
+ 
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-text-light);
+}
+
+p {
+    color: var(--color-text-light);
+    font-size: 1rem;
+}
+/*Footer*/
+
+.main-footer {
+    background-color: var(--color-nav-footer);
+    color: var(--color-text-secondary);
+    padding: 40px 20px 10px 20px;
+    margin-top: 60px;
+    border-top: 4px solid var(--color-primary);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+}
+.footer-column h4 {
+    color: var(--color-white); margin-bottom: 15px; font-size: 1.2rem;
+}
+.footer-column p, .footer-column li {
+    font-size: 0.9rem; line-height: 1.6;
+}
+.footer-column ul {
+    list-style: none; padding: 0;
+}
+.footer-column ul a {
+    color: var(--color-text-secondary); text-decoration: none; transition: color 0.3s ease;
+}
+.footer-column ul a:hover {
+    color: var(--color-primary-hover);
+}
+.footer-bottom {
+    text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #444;
+}
+.footer-bottom p {
+    font-size: 0.8rem; color: #888;
+}
+
+/* Job Vancinces*/
+
+.vacancies-page-container {
+    padding: 40px 20px;
+}
+
+.vacancies-header {
+    display: flex; gap: 30px; align-items: center; margin-bottom: 40px; max-width: 1200px; margin: 0 auto 40px auto;
+}
+.vacancies-header img {
+    max-width: 400px; flex-shrink: 0; border-radius: 8px;
+}
+.vacancies-header-text h1 {
+    font-size: 3rem;
+}
+.vacancies-header-text p {
+    font-size: 1.2rem; color: var(--color-text-secondary);
+}
+.jobs-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;
+}
+.job-card {
+    background-color: var(--color-card-background);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--color-card-border);
+    display: flex;
+    flex-direction: column;
+}
+.job-card h2 {
+    color: var(--color-card-text);
+    margin-bottom: 20px;
+}
+.job-card h3 {
+    margin-top: 20px; margin-bottom: 10px; color: var(--color-primary); font-size: 1rem;
+}
+.job-card ul {
+    list-style-position: inside; padding-left: 0; flex-grow: 1; color: var(--color-card-text);
+}
+.job-card ul li {
+    font-size: 0.9rem;
+}
+.apply-button {
+    display: block;
+    margin-top: 25px;
+    padding: 12px 20px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+.apply-button:hover {
+    background-color: var(--color-primary-hover);
+}
+
