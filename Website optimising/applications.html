@@ -86,29 +86,36 @@
 document.addEventListener('DOMContentLoaded', function() {
     const applicationForm = document.getElementById('application-form');
     const successMessage = document.getElementById('success-message');
-    const phoneInput = document.getElementById('phone');
-    const phoneValidationMessage = document.querySelector('.validation-message');
-
-    function validatePhone() {
-        if (phoneInput.validity.patternMismatch || phoneInput.value === "") {
-            phoneValidationMessage.style.display = 'block';
-        } else {
-            phoneValidationMessage.style.display = 'none';
-        }
-    }
-
-    phoneInput.addEventListener('keyup', validatePhone);
 
     applicationForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); 
 
-        if (applicationForm.checkValidity()) {
-            applicationForm.style.display = 'none';
-            successMessage.style.display = 'block';
-        } else {
-            validatePhone();
-            applicationForm.reportValidity();
-        }
+        const formData = new FormData(applicationForm);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        fetch('/.netlify/functions/submit-application', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                applicationForm.style.display = 'none';
+                successMessage.style.display = 'block';
+            } else {
+                response.json().then(err => {
+                    console.error('Submission failed:', err);
+                    alert('An error occurred. Please try again.');
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Network error:', error);
+            alert('A network error occurred. Please check your connection.');
+        });
     });
 });
 </script>
