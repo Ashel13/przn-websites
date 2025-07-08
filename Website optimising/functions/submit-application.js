@@ -1,43 +1,35 @@
 const { Pool } = require('pg');
 
-exports.handler = async function(event, context) {
-  // Only allow POST requests from your form
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+exports.handler = async function(event) {
+    console.log("Function started."); // Log 1: Confirms the function ran
 
-  try {
-    // Get the data from the form submission
-    const { fullName, email, phone } = JSON.parse(event.body);
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, body: 'Method Not Allowed' };
+    }
 
-    // Get your secret database URL from Netlify's settings
-    const connectionString = process.env.DATABASE_URL;
+    try {
+        const { fullName, email, phone } = JSON.parse(event.body);
+        console.log("Received data:", { fullName, email, phone }); // Log 2: Shows the data received from the form
 
-    // Connect to the database
-    const pool = new Pool({
-      connectionString: connectionString,
-    });
+        const connectionString = process.env.DATABASE_URL;
+        if (!connectionString) {
+            console.error("Database URL is not set.");
+            throw new Error("Database URL environment variable is not set.");
+        }
+        
+        console.log("Connecting to the database..."); // Log 3: Confirms it's about to connect
+        const pool = new Pool({ connectionString });
 
-    // The SQL command to insert a new row into a table called "applications"
-    // IMPORTANT: You must create this table in your Neon database first.
-    const query = 'INSERT INTO applications(full_name, email, phone) VALUES($1, $2, $3)';
-    const values = [fullName, email, phone];
+        const query = 'INSERT INTO applications(full_name, email, phone) VALUES($1, $2, $3)';
+        const values = [fullName, email, phone];
 
-    // Run the command
-    await pool.query(query, values);
-    await pool.end();
+        await pool.query(query, values);
+        console.log("Data successfully inserted into database."); // Log 4: Confirms data was saved
 
-    // Send a success response back to the form
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "Application submitted successfully!" }),
-    };
-  } catch (error) {
-    console.error('Error:', error);
-    // Send an error response back to the form
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: "Error submitting application." }),
-    };
-  }
+        return { statusCode: 200, body: JSON.stringify({ message: "Success" }) };
+    } catch (error) {
+        // This will now log the specific database error
+        console.error('A critical error occurred:', error);
+        return { statusCode: 500, body: JSON.stringify({ message: "Error" }) };
+    }
 };
